@@ -1,0 +1,2 @@
+SECRET_KEY=a4x)ypxuu%1)#gn)qandj56f6f)7!$bq7a@#p&azb9y-q4f$61
+DEBUG=True

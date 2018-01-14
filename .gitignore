@@ -1,9 +1,6 @@
 *.sqlite3
 *.db
-bin
-include
-lib
-pip0selfcheck.json
+venv
 .env
 *.pyc
 *.pyo

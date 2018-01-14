@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="row">
+    <h1>Resultado da busca</h1>
+    {% if result %}
+        {% for r in result %}
+            <h3><a href="{% url 'tarefas:detalhes_tarefa' r.id %}">{{ r.nome }}</a></h3>
+        {% endfor %}
+    {% else %}
+        <ul class="collection">
+          <li class="collection-item dismissable light-blue lighten-4">
+              <span class="light-blue-text text-accent-4">Nenhuma tarefa encontrada</span>
+          </li>
+        </ul>
+    {% endif %}
+    </div>
+{% endblock body %}

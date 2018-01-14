@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load material_form %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Tarefa</h1><br>
+{#            <fieldset disabled="true">#}
+                <form >
+                    {% csrf_token %}
+                    {% form form=form %}
+                        {% attr form.nome 'widget' disabled%}true{% endattr %}
+                        {% attr form.descricao 'widget' disabled%}true{% endattr %}
+                        {% attr form.data_final 'widget' disabled%}true{% endattr %}
+                        {% attr form.prioridade 'widget' disabled%}true{% endattr %}
+                        {% attr form.categoria 'widget' disabled%}true{% endattr %}
+                    {% endform %}
+                    <div class="form-group">
+                    </div>
+                </form>
+{#            </fieldset>#}
+        </div>
+     </div>
+{% endblock body %}
+

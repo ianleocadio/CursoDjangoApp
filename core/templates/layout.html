@@ -1,0 +1,87 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Curso Django</title>
+
+    <link href="{% static 'css/materialize.min.css' %}" rel="stylesheet">
+    {% include 'material/includes/material_css.html' %}
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <!-- Compiled and minified JavaScript -->
+    {% include 'material/includes/material_js.html' %}
+    <script src="{% static "js/materialize.min.js" %}"></script>
+    <script>
+        $(document).ready(function(){
+            $(".dropdown-button").dropdown({
+                'belowOrigin': true,
+                'hover': true
+            });
+        });
+        function showMessageDialog(m){
+          $(document).ready(function(){
+              Materialize.toast(m, 5000);
+          });
+        };
+    </script>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">Curso Django</a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+              <nav>
+                  <div class="nav-wrapper">
+                      <form action="{% url 'tarefas:search' %}" method="GET">
+                        <div class="input-field">
+                          <input id="search" type="search" name="search" placeholder="Busca" required>
+                          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                          <i class="material-icons">close</i>
+                        </div>
+                      </form>
+                   </div>
+              </nav>
+          </li>
+          <li><a href="/">Home</a></li>
+          <li><a href="{% url 'tarefas:lista_tarefas' %}">Tarefas</a></li>
+          <li><a href="{% url 'tarefas:lista_categorias' %}">Categorias</a></li>
+          {% if user.is_authenticated  %}
+              <!-- Dropdown Trigger -->
+              <li>
+                  <a class="dropdown-button" href="#!" data-activates="dropdown1">
+                      {{ user.get_full_name|default:user.username }}
+                      <i class="material-icons right">arrow_drop_down</i>
+                  </a>
+              </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <ul id="dropdown1" class="dropdown-content">
+      {% if user.is_staff %}
+        <li><a href="/admin">Painel Admin</a></li>
+      {% endif %}
+       <li><a href="{% url 'accounts:change_password' %}">Alterar senha</a></li>
+      <li class="divider"></li>
+      <li><a href="{% url 'accounts:logout_user' %}">Sair</a></li>
+    </ul>
+    <div class="container">
+    {% block body %}
+    <!-- Page Content -->
+    {% endblock body %}
+    </div>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="row">
+        <h1>Lista de tarefas</h1><br>
+    {% if messages %}
+        {% for message in messages %}
+            <ul class="collection">
+              <li class="collection-item dismissable red lighten-4">
+                  <span class="red-text text-accent-4">{{ message }}</span>
+              </li>
+            </ul>
+        {% endfor %}
+    {% endif %}
+    {% if tarefas %}
+        <table class="highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>Tarefa</th>
+                    <th>Descrição</th>
+                    <th>Data final</th>
+                    <th>Prioridade</th>
+                    <th>Categoria</th>
+{#                    <th class="center">Status</th>#}
+                    <th  class="right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in tarefas %}
+                    <tr>
+                        <td>{{ t.nome }}</td>
+                        <td>{{ t.descricao }}</td>
+                        <td>{{ t.data_final }}</td>
+                        <td>{{ t.get_prioridade_display }}</td>
+                        <td>{{ t.categoria }}</td>
+{#                        {% if t.status == 'C' %}#}
+{#                            <td class="green-text text-accent-4 center"><i class="material-icons">check_box</i></td>#}
+{#                        {% elif t.status == 'CD' %}#}
+{#                            <td class="red-text text-accent-4 center"><i class="material-icons">clear</i></td>#}
+{#                        {% else %}#}
+{#                            <td class="amber-text text-lighten-1 center"><i class="material-icons">check_box_outline_blank</i></td>#}
+{#                        {% endif %}#}
+                        <td  class="right">
+                            <a href="{% url 'tarefas:edita_tarefa' t.id %}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'tarefas:delete_tarefa' t.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <ul class="collection">
+          <li class="collection-item dismissable light-blue lighten-4">
+              <span class="light-blue-text text-accent-4">Não há tarefas disponíveis</span>
+          </li>
+        </ul>
+    {% endif %}
+    <a href="{% url 'tarefas:nova_tarefa' %}" class="btn btn-info" role="button">Adicionar tarefa</a>
+    </div>
+{% endblock body %}
