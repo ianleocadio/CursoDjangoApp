@@ -29,11 +29,13 @@
               <form class="form-signin" method="post">
                   <h2>Faça login</h2>
                   {% if messages %}
+                      <ul class="collection">
                       {% for message in messages %}
-                          <div class="alert alert-danger">
-                              <strong>Erro:</strong> {{ message }}
-                          </div>
+                          <li class="collection-item dismissable light-blue lighten-4">
+                              <span class="light-blue-text text-accent-4">{{ message }}</span>
+                          </li>
                       {% endfor %}
+                      </ul>
                   {% endif %}
                   {% csrf_token %}
                   {% form form=form %}
