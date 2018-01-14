@@ -1,0 +1,9 @@
+*.sqlite3
+*.db
+bin
+include
+lib
+pip0selfcheck.json
+.env
+*.pyc
+*.pyo
